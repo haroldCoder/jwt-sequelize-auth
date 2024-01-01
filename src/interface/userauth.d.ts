@@ -4,5 +4,5 @@ export interface Userauth{
     email: string,
     password: string,
     date?: Date,
-    token: string 
+    token?: string 
 }
