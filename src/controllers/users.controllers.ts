@@ -14,7 +14,9 @@ class UsersControllers extends UserModel {
     }
 
     getUsers = async () => {
-        const users: Array<Userauth> = await this.model_user.findAll();
+        const users: Array<Userauth> = await this.model_user.findAll({
+            attributes: ['username', 'email', 'date']
+        });
         this.res.status(200).json(users);
     }
 
