@@ -24,7 +24,7 @@ class UsersControllers extends UserModel {
                 username: user.username,
                 email: user.email,
                 password: user.password,
-                token: user.password,
+                token: user.token,
                 date: user.date
             });
         }
