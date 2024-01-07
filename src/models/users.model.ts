@@ -6,8 +6,6 @@ class UserModel extends SequelizeConnect {
 
     constructor() {
         super(process.env.MYSQL_DB!, process.env.MYSQL_USER!, process.env.MYSQL_PASSWORD!, process.env.MYSQL_HOST!, "mysql");
-        console.log(this.sqlize.isDefined("usersdb"));
-
         if (!this.sqlize.isDefined("usersdb")) {
             this.model_user = this.sqlize.define('usersdb', {
                 Id: {
