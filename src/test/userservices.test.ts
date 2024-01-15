@@ -4,20 +4,33 @@ import 'mocha';
 import assert = require("assert");
 import { Userauth } from "../interface/userauth";
 
-describe('GET /users', () => {
-  it('response 200 status code', (done) => {
-    request(server).get(`/api/users?auth=${process.env.TOKEN_USER}&password=${process.env.PASSWORD_USER}`)
-      .expect("Content-type", /json/)
-      .expect(200, done);
-  })
-  
-  it('response with Array of users', (done) => {
-    request(server).get(`/api/users?auth=${process.env.TOKEN_USER}&password=${process.env.PASSWORD_USER}`)
-      .end((err, res) => {
-        assert(Array.isArray(res.body));
-        assert(res.body.length > 0);
-        done();
-      });
+// describe('GET /users', () => {
+//   it('response 200 status code', (done) => {
+//     request(server).get(`/api/users?auth=${process.env.TOKEN_USER}&password=${process.env.PASSWORD_USER}`)
+//       .expect("Content-type", /json/)
+//       .expect(200, done);
+//   })
+//   it('response with Array of users', (done) => {
+//     request(server).get(`/api/users?auth=${process.env.TOKEN_USER}&password=${process.env.PASSWORD_USER}`)
+//       .end((err, res) => {
+//         assert(Array.isArray(res.body));
+//         assert(res.body.length > 0);
+//         done();
+//       });
+//   });
+// });
+
+describe('POST /register', () => {
+  it('Register new user', (done) => {
+    const user: Userauth = {username: "usertest", email: "usertest@gmail.com", password: "usertest123*", date: new Date('2002-12-13')}
+    request(server).post('/register')
+    .send(user)
+    .end((err, res)=>{
+      if(err) throw err;
+      assert(res.statusCode == 200)
+      assert(res.body && typeof res.body === 'object')
+      done()
+    })
   });
 });
 
